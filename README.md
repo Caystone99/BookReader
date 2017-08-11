@@ -4,7 +4,7 @@ This is a Book Reader App. Feel free to use this app to search/record books you 
 
 ## Technical Stack
 
-* React
+* React /  React Router
 
 ## Development Log
 
