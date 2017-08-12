@@ -11,18 +11,20 @@ class Book extends React.Component {
   render() {
     const { books } = this.props;
     return (
-      <div>
+      <ol className="books-grid">
         {books.map((book, index) => (
-          <div className="book" key={index}>
-            <div className="book-top">
-              <div className="book-cover" style = {{width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+          <li key={index}>
+            <div className="book">
+              <div className="book-top">
+                <div className="book-cover" style = {{width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+                </div>
+                <BookShelfChanger book={book} />
               </div>
-              <BookShelfChanger />
+              <div className="book-title">{book.title}</div>
             </div>
-            <div className="book-title">{book.title}</div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
     );
   }
 }

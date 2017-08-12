@@ -1,5 +1,6 @@
 import React from 'react';
 import Bookshelf from './components/bookshelf/bookshelf';
+import SearchBooks from './components/search-books/search-books';
 import {Route, Link} from 'react-router-dom';
 import {CAT_DEFINITION, ERR_INFO} from './config/config';
 import * as BooksAPI from './api/BooksAPI';
@@ -12,39 +13,51 @@ class BooksApp extends React.Component {
   getInitialState = () => {
     return {
       books: {
-        currentReading: ["nggnmAEACAAJ"],
-        wantToRead: ["sJf1vQAACAAJ"],
-        read: ["evuwdDLfAyYC"],
+        // currentlyReading: ["nggnmAEACAAJ","jAUODAAAQBAJ"],
+        // wantToRead: ["sJf1vQAACAAJ"],
+        // read: ["evuwdDLfAyYC"],
+        currentlyReading: [],
+        wantToRead: [],
+        read: [],
         all: []
       },
       loading: true,
       error: null
     }
   };
+  // This function transform the data style
+  _normalizeBooks = (books) => {
+    let ret = Object.assign({}, this.state.books);
+    // console.log(ret);
+    books.map((book) => {
+      ret[book.shelf].push(book.id);
+      return null;
+    });
+    ret.all = books;
+    return ret;
+  };
 
   // Using constructor in ES6
   constructor(...props) {
     super(...props);
-    // We will know it gets the initial state
+    //  the initial state
     this.state = this.getInitialState()
   }
   // This happens after DOM render action is finished.
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log(books);
-      let bookData = this.state.books;
-      bookData.all = books;
       this.setState({
         loading: false,
-        books: bookData
-      })
-    }).catch(() => {
+        books: this._normalizeBooks(books)
+      });
+    }).catch((e) => {
       this.setState({
+        books: {},
         loading: false,
         error: ERR_INFO
       });
       // alert('Error 0: Fetching data failed! Probably bad connection')
-      console.log(ERR_INFO);
+      console.log(`${ERR_INFO}:${e}`);
     })
   }
   // we will pass data into components
@@ -73,7 +86,7 @@ class BooksApp extends React.Component {
             </div>
           )}/>
           <Route path="/create" render={({ history }) => (
-            <div>Create</div>
+            <div><SearchBooks /></div>
           )}/>
         </div>
       );

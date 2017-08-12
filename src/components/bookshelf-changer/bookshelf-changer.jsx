@@ -1,10 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+// import * as BooksAPI from '../../api/BooksAPI';
 
 class BookshelfChanger extends React.Component {
+
+  static propTypes = {
+    book: PropTypes.object.isRequired
+  };
+
   render() {
+    const {book} = this.props;
     return (
       <div className="book-shelf-changer">
-        <select>
+        <select selected={book.shelf}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
