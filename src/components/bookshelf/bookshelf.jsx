@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Book from "../book/book";
+import {CAT_DEFINITION} from '../../config/config';
 
 class Bookshelf extends React.Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
     setBookShelf: PropTypes.func.isRequired
   };
   // This is a private method for Bookshelf
@@ -27,11 +27,12 @@ class Bookshelf extends React.Component {
   };
 
   render() {
-    const { books, categories } = this.props;
+    const { books } = this.props;
+
     // return only if we have obtained books in properties
     return ( books &&
       <div className="bookshelf">
-        {categories.map((cat, index) => (
+        {CAT_DEFINITION.map((cat, index) => (
           <div key={'book' + index}>
             <h2 className="bookshelf-title">{cat.name}</h2>
             <div className="bookshelf-books">

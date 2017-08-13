@@ -3,7 +3,7 @@ import Bookshelf from './components/bookshelf/bookshelf';
 import SearchBooks from './components/search-books/search-books';
 import Loading from './components/loading/loading';
 import {Route, Link} from 'react-router-dom';
-import {CAT_DEFINITION, ERR_INFO} from './config/config';
+import {ERR_INFO} from './config/config';
 import * as BooksAPI from './api/BooksAPI';
 import './common/css/App.css';
 
@@ -78,7 +78,6 @@ class BooksApp extends React.Component {
   // we will pass data into components
   render() {
     const {books, loading, error} = this.state;
-    const {categories} = this.props;
 
     if(error !== null) {
       return <span>Error: {error}</span>
@@ -92,7 +91,7 @@ class BooksApp extends React.Component {
                 <h1>My Read App</h1>
               </div>
               <div className="list-books-content">
-                <Bookshelf books={books} categories={categories} setBookShelf={(book, shelf) => {
+                <Bookshelf books={books} setBookShelf={(book, shelf) => {
                   this._setBookShelf(book, shelf)
                 }}/>
               </div>
@@ -111,8 +110,8 @@ class BooksApp extends React.Component {
 }
 
 // Default Property
-BooksApp.defaultProps = {
-  categories: CAT_DEFINITION
-};
+// BooksApp.defaultProps = {
+//   categories: CAT_DEFINITION
+// };
 
 export default BooksApp
