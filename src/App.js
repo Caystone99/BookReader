@@ -102,8 +102,7 @@ class BooksApp extends React.Component {
             </div>
           )}/>
           <Route path="/create" render={({ history }) => (
-            <div><SearchBooks currentBooks={books} normalizeBooks = {(books) => {this._normalizeBooks(books)}}
-              setBookShelf={(id, shelf) => {this._setBookShelf(id, shelf)}} /></div>
+            <div><SearchBooks currentBooks={books} setBookShelf={(id, shelf) => {this._setBookShelf(id, shelf)}} /></div>
           )}/>
         </div>
       );

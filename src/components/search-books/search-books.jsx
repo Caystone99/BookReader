@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 class searchBooks extends React.Component {
 
   static propTypes = {
-    normalizeBooks: PropTypes.func.isRequired,
     currentBooks: PropTypes.array.isRequired
   };
 
