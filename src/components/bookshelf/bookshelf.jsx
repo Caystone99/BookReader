@@ -4,8 +4,9 @@ import Book from "../book/book";
 
 class Bookshelf extends React.Component {
   static propTypes = {
-    books: PropTypes.object.isRequired,
-    categories: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    setBookShelf: PropTypes.func.isRequired
   };
   // This is a private method for Bookshelf
   // returns an Array of book objects based on category
@@ -15,16 +16,13 @@ class Bookshelf extends React.Component {
     if (!this.props.books) {
       return ret;
     }
-    let ids = this.props.books[category];
-    let allBooks = this.props.books.all;
-    ids.map((id) => {
-      let bookIndex =  allBooks.findIndex((elem) => {
-        return elem.id === id;
-      });
-      ret.push(allBooks[bookIndex]);
+    let allBooks = this.props.books;
+    allBooks.map((book) => {
+      if (book.shelf === category) {
+        ret.push(book);
+      }
       return null;
     });
-    // console.log(ret);
     return ret;
   };
 
@@ -37,7 +35,7 @@ class Bookshelf extends React.Component {
           <div key={'book' + index}>
             <h2 className="bookshelf-title">{cat.name}</h2>
             <div className="bookshelf-books">
-              <Book books={ this._findBooks(cat.tag) }/>
+              <Book booksArray={ this._findBooks(cat.tag)} {...this.props} />
             </div>
           </div>
         ))}
