@@ -1,8 +1,7 @@
 import React from 'react';
-import Bookshelf from './components/bookshelf/bookshelf';
 import SearchBooks from './components/search-books/search-books';
-import Loading from './components/loading/loading';
-import {Route, Link} from 'react-router-dom';
+import ListBooks from './components/list-books/list-books';
+import {Route} from 'react-router-dom';
 import {ERR_INFO} from './config/config';
 import * as BooksAPI from './api/BooksAPI';
 import './common/css/App.css';
@@ -71,11 +70,10 @@ class BooksApp extends React.Component {
         loading: false,
         error: ERR_INFO
       });
-      // alert('Error 0: Fetching data failed! Probably bad connection')
       console.log(`${ERR_INFO}:${e}`);
     })
   }
-  // we will pass data into components
+
   render() {
     const {books, loading, error} = this.state;
 
@@ -85,21 +83,11 @@ class BooksApp extends React.Component {
       return (
         <div className="app">
           <Route exact path="/" render={() => (
-            <div className="list-books">
-              {(loading) ? <Loading /> : ''}
-              <div className="list-books-title">
-                <h1>My Read App</h1>
-              </div>
-              <div className="list-books-content">
-                <Bookshelf books={books} setBookShelf={(book, shelf) => {
-                  this._setBookShelf(book, shelf)
-                }}/>
-              </div>
-              <Link className="open-search" to="/create">
-                <span>Add a book</span>
-              </Link>
-            </div>
-          )}/>
+            <ListBooks books={books}
+                       loading={loading}
+                       setBookShelf={(book, shelf) => {
+              this._setBookShelf(book, shelf)}}
+              />)} />
           <Route path="/create" render={({ history }) => (
             <div><SearchBooks currentBooks={books} setBookShelf={(id, shelf) => {this._setBookShelf(id, shelf)}} /></div>
           )}/>
