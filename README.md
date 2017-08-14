@@ -2,6 +2,12 @@
 
 This is a Book Reader App. Feel free to use this App to search/record to make a reading plan.
 
+## Installation
+
+1. Go to the current folder, and `npm install` all the dependencies (**It is recommended to use `yarn install`**)
+2. To start the dev server, use `npm start`(or yarn start) and web browser will be automatically open at `http://127.0.0.1:3000/`
+3. To build for production, use `npm build`(or yarn build)
+
 ## Technical Stack
 
 * React /  React Router
@@ -43,3 +49,7 @@ I have arranged the code structure so that we can develop easily.
   - search-books
     - book(loop by books)
       - bookshelf-changer
+
+## License
+
+This project is under the license of GPL-v3.0. Detail information can be found on [here](https://github.com/liu599/BookReader/blob/master/LICENSE)
